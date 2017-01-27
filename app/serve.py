@@ -7,6 +7,7 @@ from flask import (Flask,
     render_template,
     url_for,
 )
+from flask_assets import Environment, Bundle
 from flask_sitemap import Sitemap
 
 import dotenv
@@ -25,9 +26,10 @@ app.config['SERVER_NAME'] = env('SERVER_NAME')
 
 app.config['SITEMAP_INCLUDE_RULES_WITHOUT_PARAMS'] = True
 app.config['SITEMAP_URL_SCHEME'] = 'https'
+assets = Environment(app)
 ext = Sitemap(app=app)
 
-
+js = Bundle(
 if env('ENV') == 'production':
     import rollbar
     import rollbar.contrib.flask
